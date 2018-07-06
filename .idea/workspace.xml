@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c824c2d-ab9e-4a7e-a914-056010ee7d7c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chosung/src/component/Board.vue" beforeDir="false" afterPath="$PROJECT_DIR$/chosung/src/component/Board.vue" afterDir="false" />
     </list>
@@ -42,8 +41,8 @@
       <file leaf-file-name="Board.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chosung/src/component/Board.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="35" column="24" lean-forward="true" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
+            <state relative-caret-position="319">
+              <caret line="59" column="25" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -100,6 +99,7 @@
     <findStrings>
       <find>conten</find>
       <find>c</find>
+      <find>model</find>
       <find>input</find>
     </findStrings>
   </component>
@@ -1035,10 +1035,10 @@
       <path value="$PROJECT_DIR$/chosung/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="5520" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="4240" />
     <option name="y" value="-769" />
-    <option name="width" value="1280" />
+    <option name="width" value="2560" />
     <option name="height" value="1418" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -1165,15 +1165,23 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1530575448762</updated>
-      <workItem from="1530575451961" duration="12424000" />
+      <workItem from="1530575451961" duration="16812000" />
     </task>
+    <task id="LOCAL-00001" summary="[chore]intellij 설정 추가.">
+      <created>1530777917324</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1530777917324</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12424000" />
+    <option name="totallyTimeSpent" value="16812000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="5520" y="-769" width="1280" height="1418" extended-state="0" />
+    <frame x="4240" y="-769" width="2560" height="1418" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" />
@@ -1194,10 +1202,10 @@
       <window_info id="Image Layers" />
       <window_info anchor="right" id="Capture Analysis" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.329296" />
+      <window_info anchor="bottom" id="Version Control" visible="true" weight="0.329296" />
+      <window_info anchor="bottom" id="Terminal" weight="0.329296" />
       <window_info anchor="right" id="Jenkins" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4996215" visible="true" weight="0.29886913" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4996215" visible="true" weight="0.14694202" />
       <window_info id="Learn" />
       <window_info anchor="right" id="SciView" />
       <window_info anchor="right" id="Theme Preview" />
@@ -1213,8 +1221,38 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="[chore]intellij 설정 추가." />
+    <option name="LAST_COMMIT_MESSAGE" value="[chore]intellij 설정 추가." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1286,8 +1324,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/chosung/src/component/Board.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="35" column="24" lean-forward="true" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
+        <state relative-caret-position="319">
+          <caret line="59" column="25" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
         </state>
       </provider>
     </entry>
