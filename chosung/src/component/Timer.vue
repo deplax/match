@@ -14,7 +14,7 @@
           <div class="md-layout-item md-layout md-gutter md-alignment-center">
             <div class="md-layout-item md-size-60">
               <md-content class="md-elevation-1">
-                <span class="timer center">00.000</span>
+                <span class="timer center">{{displayTime}}</span>
               </md-content>
               <md-field>
                 <label>Number</label>
@@ -28,8 +28,8 @@
           <div class="md-layout-item md-layout md-gutter md-alignment-center">
             <div class="md-layout-item">
               <md-card-actions class="center">
-                <md-button>pause</md-button>
-                <md-button>stop</md-button>
+                <md-button v-on:click="pause">pause</md-button>
+                <md-button v-on:click="stop">stop</md-button>
               </md-card-actions>
             </div>
           </div>
@@ -51,37 +51,52 @@
 </template>
 
 <script>
-  let timerMillisecond = 1000 * 10;
-  let timerTime = Date.now() + timerMillisecond;
-  let diff = timerTime - Date.now();
-  let displaySecond = (diff % (1000 * 60)) / 1000;
-  let displayMilisecond = diff % 1000;
+
+  const DEFAULT_TIME = "00.000";
+  let timer;
 
   export default {
     data() {
       return {
         count: 10,
         currentTime: 0,
-        timerStatus: "STOP"
+        timerStatus: "STOP",
+//        START, STOP, PAUSE
+        displayTime: DEFAULT_TIME
       }
     },
     methods: {
       start() {
+        let self = this;
         let timerMillisecond = 1000 * this.count;
         let timerTime = Date.now() + timerMillisecond;
 
-        const timer = setInterval(function(){
-          let diff = timerTime - Date.now();
-          let displaySecond = (diff % (1000 * 60)) / 1000;
-          let displayMillisecond = diff % 1000;
-          console.log(displaySecond + ":" + displayMillisecond / 100)
-        }, 10);
+        if (self.timerStatus !== "PLAY") {
+          self.timerStatus = "PLAY";
+          timer = setInterval(function () {
+            let diff = timerTime - Date.now();
+            let displaySecond = (diff % (1000 * 60)) / 1000;
+            let displayMillisecond = diff % 1000;
+
+            if (diff <= 0){
+              self.stop()
+            }
+
+            let displayText = Math.floor(displaySecond, 0).toString().padStart(2, "0") + "." + displayMillisecond.toString().padStart(3, "0");
+            self.displayTime = displayText;
+          }, 10);
+        }
       },
       stop() {
-
+        clearInterval(timer);
+        this.timerStatus = "STOP";
+        this.displayTime = DEFAULT_TIME;
       },
       pause() {
-
+        this.updateGameStatus("UPDATE");
+      },
+      updateGameStatus(status) {
+        this.$emit("updateStatus", status);
       }
     }
   }
