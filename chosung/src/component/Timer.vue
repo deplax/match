@@ -18,7 +18,7 @@
               </md-content>
               <md-field>
                 <label>Number</label>
-                <md-input type="number" v-model.number="count"></md-input>
+                <md-input type="number" v-model.number="count" v-on:change="changeInput"></md-input>
               </md-field>
             </div>
           </div>
@@ -29,7 +29,7 @@
             <div class="md-layout-item">
               <md-card-actions class="center">
                 <md-button v-on:click="pause">pause</md-button>
-                <md-button v-on:click="stop">stop</md-button>
+                <md-button v-on:click="stop">{{stopButtonText}}</md-button>
               </md-card-actions>
             </div>
           </div>
@@ -39,7 +39,7 @@
           <div class="md-layout-item md-layout md-gutter md-alignment-center">
             <div class="md-layout-item md-size-95">
               <div>
-                <md-button class="md-raised md-primary center start" v-on:click="start">start</md-button>
+                <md-button class="md-raised md-primary center start" v-on:click="start">{{startButtonText}}</md-button>
               </div>
             </div>
           </div>
@@ -59,46 +59,100 @@
     data() {
       return {
         count: 10,
-        currentTime: 0,
-        timerStatus: "STOP",
-//        START, STOP, PAUSE
-        displayTime: DEFAULT_TIME
+        timerTime: 0,
+        timerStatus: "READY",
+//        READY, RUN, PAUSE
+        gameStatus: "READY",
+//        READY, PLAY, END
+        displayTime: "",
+        progress: "",
+        stopButtonText: "STOP",
+        startButtonText: "START"
       }
     },
     methods: {
       start() {
         let self = this;
         let timerMillisecond = 1000 * this.count;
-        let timerTime = Date.now() + timerMillisecond;
+        self.timerTime = Date.now() + timerMillisecond;
 
-        if (self.timerStatus !== "PLAY") {
-          self.timerStatus = "PLAY";
+        if ((self.timerStatus === "READY" || self.timerStatus === "PAUSE") && (self.gameStatus === "READY" || self.gameStatus === "PLAY")) {
+          self.timerStatus = "RUN";
+          self.gameStatus = "PLAY";
+          self.startButtonText = "NEXT";
+
           timer = setInterval(function () {
-            let diff = timerTime - Date.now();
+            console.log("Test");
+            let diff = self.timerTime - Date.now();
             let displaySecond = (diff % (1000 * 60)) / 1000;
             let displayMillisecond = diff % 1000;
+            let displayText = Math.floor(displaySecond, 0).toString().padStart(2, "0") + "." + displayMillisecond.toString().padStart(3, "0");
 
-            if (diff <= 0){
-              self.stop()
+            if (diff <= 0) {
+              self.timeUp();
+            } else {
+              self.displayTime = displayText;
             }
 
-            let displayText = Math.floor(displaySecond, 0).toString().padStart(2, "0") + "." + displayMillisecond.toString().padStart(3, "0");
-            self.displayTime = displayText;
+            console.log(displayText)
           }, 10);
+        } else if (self.timerStatus === "RUN" && self.gameStatus === "PLAY") {
+          let timerMillisecond = 1000 * this.count;
+          self.timerTime = Date.now() + timerMillisecond;
         }
+      },
+      timeUp() {
+        clearInterval(timer);
+        this.timerStatus = "READY";
+        this.stopButtonText = "CLEAR";
+        this.startButtonText = "END";
+        this.gameStatus = "END";
+        this.initDisplay();
       },
       stop() {
         clearInterval(timer);
-        this.timerStatus = "STOP";
-        this.displayTime = DEFAULT_TIME;
+        this.timerStatus = "READY";
+        this.stopButtonText = "STOP";
+        this.startButtonText = "START";
+        this.gameStatus = "READY";
+        this.initDisplay();
+
       },
       pause() {
+        if (this.timerStatus === "RUN") {
+          this.timerStatus = "PAUSE";
+          clearInterval(timer);
+        } else if (this.timerStatus === "PAUSE") {
+          console.log("tes");
+          this.start();
+        }
+        clearInterval(timer);
         this.updateGameStatus("UPDATE");
       },
       updateGameStatus(status) {
         this.$emit("updateStatus", status);
+      },
+      initTimer: function () {
+        this.initDisplay();
+      },
+
+      changeInput: function () {
+        this.count = Math.round(this.count);
+        this.count = Math.abs(this.count);
+
+        if (this.count > 99) {
+          this.count = 99;
+        }
+        this.initDisplay();
+      },
+      initDisplay: function () {
+        this.displayTime = this.count.toString().padStart(2, "0") + ".000"
       }
+    },
+    mounted: function () {
+      this.initTimer();
     }
+
   }
 </script>
 
