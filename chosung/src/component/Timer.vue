@@ -59,6 +59,7 @@
     data() {
       return {
         count: 10,
+        remainTime: 0,
         timerTime: 0,
         timerStatus: "READY",
 //        READY, RUN, PAUSE
@@ -72,18 +73,26 @@
     },
     methods: {
       start() {
+
         let self = this;
-        let timerMillisecond = 1000 * this.count;
-        self.timerTime = Date.now() + timerMillisecond;
+
+        if (self.timerStatus === "PAUSE") {
+          self.timerTime = Date.now() + self.remainTime;
+        } else {
+          let timerMillisecond = 1000 * this.count;
+          self.remainTime = timerMillisecond;
+          self.timerTime = Date.now() + self.remainTime;
+        }
 
         if ((self.timerStatus === "READY" || self.timerStatus === "PAUSE") && (self.gameStatus === "READY" || self.gameStatus === "PLAY")) {
           self.timerStatus = "RUN";
           self.gameStatus = "PLAY";
           self.startButtonText = "NEXT";
 
+          console.log("play");
           timer = setInterval(function () {
-            console.log("Test");
             let diff = self.timerTime - Date.now();
+            self.remainTime = diff;
             let displaySecond = (diff % (1000 * 60)) / 1000;
             let displayMillisecond = diff % 1000;
             let displayText = Math.floor(displaySecond, 0).toString().padStart(2, "0") + "." + displayMillisecond.toString().padStart(3, "0");
@@ -93,8 +102,6 @@
             } else {
               self.displayTime = displayText;
             }
-
-            console.log(displayText)
           }, 10);
         } else if (self.timerStatus === "RUN" && self.gameStatus === "PLAY") {
           let timerMillisecond = 1000 * this.count;
@@ -120,13 +127,13 @@
       },
       pause() {
         if (this.timerStatus === "RUN") {
+          console.log("pause");
           this.timerStatus = "PAUSE";
           clearInterval(timer);
         } else if (this.timerStatus === "PAUSE") {
-          console.log("tes");
+          console.log("restart");
           this.start();
         }
-        clearInterval(timer);
         this.updateGameStatus("UPDATE");
       },
       updateGameStatus(status) {
