@@ -67,8 +67,8 @@
           <file leaf-file-name="Timer.vue" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/chosung/src/component/Timer.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="374">
-                  <caret line="28" column="40" lean-forward="true" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="40" />
+                <state relative-caret-position="204">
+                  <caret line="170" lean-forward="true" selection-start-line="170" selection-end-line="170" />
                 </state>
               </provider>
             </entry>
@@ -293,7 +293,7 @@
       <workItem from="1531188079814" duration="1455000" />
       <workItem from="1531203134663" duration="3249000" />
       <workItem from="1532048713734" duration="3917000" />
-      <workItem from="1532090282912" duration="432000" />
+      <workItem from="1532090282912" duration="700000" />
     </task>
     <task id="LOCAL-00001" summary="[chore]intellij 설정 추가.">
       <created>1530777917324</created>
@@ -323,11 +323,18 @@
       <option name="project" value="LOCAL" />
       <updated>1532090571533</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="[chore]intellij 설정 추가.">
+      <created>1532090911404</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1532090911404</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33584000" />
+    <option name="totallyTimeSpent" value="33852000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1680" height="1028" extended-state="6" />
@@ -784,8 +791,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/chosung/src/component/Timer.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="28" column="40" lean-forward="true" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="40" />
+        <state relative-caret-position="204">
+          <caret line="170" lean-forward="true" selection-start-line="170" selection-end-line="170" />
         </state>
       </provider>
     </entry>
