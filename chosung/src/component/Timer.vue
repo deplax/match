@@ -54,6 +54,29 @@
 <script>
 
   const DEFAULT_TIME = "00.000";
+  const GameStatus = {
+    READY: "READY",
+    PLAY: "PLAY",
+    END: "END"
+  };
+
+  const TimerStatus = {
+    READY: "READY",
+    RUN: "RUN",
+    PAUSE: "PAUSE"
+  };
+
+  const StopButtonText = {
+    STOP: "STOP",
+    CLEAR: "CLEAR"
+  };
+
+  const StartButtonText = {
+    START: "START",
+    NEXT: "NEXT",
+    END: "END"
+  };
+
   let timer;
 
   export default {
@@ -63,14 +86,12 @@
         count: 10,
         remainTime: 0,
         timerTime: 0,
-        timerStatus: "READY",
-//        READY, RUN, PAUSE
-        gameStatus: "READY",
-//        READY, PLAY, END
+        timerStatus: TimerStatus.READY,
+        gameStatus: GameStatus.READY,
         displayTime: "",
         progress: "",
-        stopButtonText: "STOP",
-        startButtonText: "START"
+        stopButtonText: StopButtonText.STOP,
+        startButtonText: StartButtonText.START
       }
     },
     methods: {
@@ -78,7 +99,7 @@
 
         let self = this;
 
-        if (self.timerStatus === "PAUSE") {
+        if (self.timerStatus === TimerStatus.PAUSE) {
           self.timerTime = Date.now() + self.remainTime;
         } else {
           let timerMillisecond = 1000 * this.count;
@@ -86,12 +107,12 @@
           self.timerTime = Date.now() + self.remainTime;
         }
 
-        if ((self.timerStatus === "READY" || self.timerStatus === "PAUSE") && (self.gameStatus === "READY" || self.gameStatus === "PLAY")) {
-          self.timerStatus = "RUN";
-          self.gameStatus = "PLAY";
-          self.startButtonText = "NEXT";
+        if ((self.timerStatus === TimerStatus.READY || self.timerStatus === TimerStatus.PAUSE)
+          && (self.gameStatus === GameStatus.READY || self.gameStatus === GameStatus.PLAY)) {
+          self.timerStatus = TimerStatus.RUN;
+          self.gameStatus = GameStatus.PLAY;
+          self.startButtonText = StartButtonText.NEXT;
 
-          console.log("play");
           timer = setInterval(function () {
             let diff = self.timerTime - Date.now();
             self.remainTime = diff;
@@ -99,46 +120,46 @@
             let displayMillisecond = diff % 1000;
             let displayText = Math.floor(displaySecond, 0).toString().padStart(2, "0") + "." + displayMillisecond.toString().padStart(3, "0");
 
+            self.getPercent(self.count, diff);
+
             if (diff <= 0) {
               self.timeUp();
             } else {
               self.displayTime = displayText;
             }
           }, 10);
-        } else if (self.timerStatus === "RUN" && self.gameStatus === "PLAY") {
+        } else if (self.timerStatus === TimerStatus.RUN && self.gameStatus === GameStatus.PLAY) {
           let timerMillisecond = 1000 * this.count;
           self.timerTime = Date.now() + timerMillisecond;
         }
       },
       timeUp() {
         clearInterval(timer);
-        this.timerStatus = "READY";
-        this.stopButtonText = "CLEAR";
-        this.startButtonText = "END";
-        this.gameStatus = "END";
+        this.timerStatus = TimerStatus.READY;
+        this.gameStatus = GameStatus.END;
+        this.stopButtonText = StopButtonText.CLEAR;
+        this.startButtonText = StartButtonText.END;
         this.initDisplay();
       },
       stop() {
         clearInterval(timer);
-        this.timerStatus = "READY";
-        this.stopButtonText = "STOP";
-        this.startButtonText = "START";
-        this.gameStatus = "READY";
+        this.timerStatus = TimerStatus.READY;
+        this.gameStatus = GameStatus.READY;
+        this.stopButtonText = StopButtonText.STOP;
+        this.startButtonText = StartButtonText.START;
         this.initDisplay();
 
       },
       pause() {
-        if (this.timerStatus === "RUN") {
-          console.log("pause");
-          this.timerStatus = "PAUSE";
+        if (this.timerStatus === TimerStatus.RUN) {
+          this.timerStatus = TimerStatus.PAUSE;
           clearInterval(timer);
-        } else if (this.timerStatus === "PAUSE") {
-          console.log("restart");
+        } else if (this.timerStatus === TimerStatus.PAUSE) {
           this.start();
         }
-        this.updateGameStatus("UPDATE");
+        this.updateStatus("UPDATE");
       },
-      updateGameStatus(status) {
+      updateStatus(status) {
         this.$emit("updateStatus", status);
       },
       initTimer: function () {
@@ -156,7 +177,10 @@
       },
       initDisplay: function () {
         this.displayTime = this.count.toString().padStart(2, "0") + ".000"
-      }
+      },
+      getPercent: function (settingTime, currentTime) {
+
+      },
     },
     mounted: function () {
       this.initTimer();
