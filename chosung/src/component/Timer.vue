@@ -120,7 +120,7 @@
             let displayMillisecond = diff % 1000;
             let displayText = Math.floor(displaySecond, 0).toString().padStart(2, "0") + "." + displayMillisecond.toString().padStart(3, "0");
 
-            self.getPercent(self.count, diff);
+            self.percent = self.getPercent(self.count * 1000, diff);
 
             if (diff <= 0) {
               self.timeUp();
@@ -179,7 +179,7 @@
         this.displayTime = this.count.toString().padStart(2, "0") + ".000"
       },
       getPercent: function (settingTime, currentTime) {
-
+        return 100 - currentTime / settingTime * 100
       },
     },
     mounted: function () {
