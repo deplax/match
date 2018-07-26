@@ -40,7 +40,9 @@
           <div class="md-layout-item md-layout md-gutter md-alignment-center">
             <div class="md-layout-item md-size-95">
               <div>
-                <md-button class="md-raised md-primary center start" v-on:click="start">{{startButtonText}}</md-button>
+                <md-button v-bind:class="{ 'md-accent': startButtonEndClass }" class="md-raised md-primary center start"
+                           v-on:click="start">{{startButtonText}}
+                </md-button>
               </div>
             </div>
           </div>
@@ -88,10 +90,11 @@
         timerTime: 0,
         timerStatus: TimerStatus.READY,
         gameStatus: GameStatus.READY,
-        displayTime: "",
-        progress: "",
         stopButtonText: StopButtonText.STOP,
-        startButtonText: StartButtonText.START
+        startButtonText: StartButtonText.START,
+        startButtonEndClass: false,
+        displayTime: "",
+        progress: ""
       }
     },
     methods: {
@@ -139,6 +142,7 @@
         this.gameStatus = GameStatus.END;
         this.stopButtonText = StopButtonText.CLEAR;
         this.startButtonText = StartButtonText.END;
+        this.startButtonEndClass = true;
         this.initDisplay();
       },
       stop() {
@@ -147,8 +151,8 @@
         this.gameStatus = GameStatus.READY;
         this.stopButtonText = StopButtonText.STOP;
         this.startButtonText = StartButtonText.START;
+        this.startButtonEndClass = false;
         this.initDisplay();
-
       },
       pause() {
         if (this.timerStatus === TimerStatus.RUN) {
