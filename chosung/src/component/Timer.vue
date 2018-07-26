@@ -1,6 +1,7 @@
 <template>
   <div class="timer_area">
     <md-card>
+      <md-progress-bar class="md-accent" md-mode="determinate" :md-value="percent"></md-progress-bar>
 
       <md-card-header>
         <div class="md-title">
@@ -58,6 +59,7 @@
   export default {
     data() {
       return {
+        percent: 0,
         count: 10,
         remainTime: 0,
         timerTime: 0,
