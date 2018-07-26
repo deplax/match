@@ -1,7 +1,12 @@
 <template>
   <div class="timer_area">
     <md-card>
-      <md-progress-bar class="md-accent" md-mode="determinate" :md-value="percent"></md-progress-bar>
+      <!--<md-progress-bar class="md-accent" md-mode="determinate" :md-value="percent"></md-progress-bar>-->
+      <div class="progress-area" style="background: darkgray">
+        <div class="progress-bar" v-bind:style="{ width: percent2 }"
+             style="height: 5px; background: firebrick; width: 10%; transition: width 0.05s; transition-timing-function: ease-in-out;">
+        </div>
+      </div>
 
       <md-card-header>
         <div class="md-title">
@@ -85,6 +90,7 @@
     data() {
       return {
         percent: 0,
+        percent2: 0,
         count: 10,
         remainTime: 0,
         timerTime: 0,
@@ -124,6 +130,7 @@
             let displayText = Math.floor(displaySecond, 0).toString().padStart(2, "0") + "." + displayMillisecond.toString().padStart(3, "0");
 
             self.percent = self.getPercent(self.count * 1000, diff);
+            self.percent2 = self.getPercent(self.count * 1000, diff) + "%";
 
             if (diff <= 0) {
               self.timeUp();
