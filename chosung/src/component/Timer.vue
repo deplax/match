@@ -4,7 +4,7 @@
       <!--<md-progress-bar class="md-accent" md-mode="determinate" :md-value="percent"></md-progress-bar>-->
       <div class="progress-area" style="background: darkgray">
         <div class="progress-bar" v-bind:style="{ width: percent2 }"
-             style="height: 5px; background: firebrick; width: 10%; transition: width 0.05s; transition-timing-function: ease-in-out;">
+             style="height: 5px; background: firebrick; width: 10%;">
         </div>
       </div>
 
